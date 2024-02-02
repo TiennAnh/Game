@@ -5,8 +5,8 @@ export default class MyGame extends Phaser.Game {
   constructor() {
     const config = {
       type: Phaser.AUTO,
-      width: 510,
-      height: 350,
+      width: 810, // 510
+      height: 550, // 350
       scene: [BootScene, MapScene],
       parent: "phaser-example",
       physics: {

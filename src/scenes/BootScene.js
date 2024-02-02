@@ -23,6 +23,15 @@ export default class BootScene extends Phaser.Scene {
     );
 
     this.load.spritesheet(
+      "checkPoint",
+      "/public/assets/animations/Checkpoint.png",
+      {
+        frameWidth: 64,
+        frameHeight: 64,
+      }
+    );
+
+    this.load.spritesheet(
       "move-Right",
       "/public/assets/animations/RunRight.png",
       {
@@ -37,6 +46,15 @@ export default class BootScene extends Phaser.Scene {
       {
         frameWidth: 32,
         frameHeight: 32,
+      }
+    );
+
+    this.load.spritesheet(
+      "Apple",
+      "/public/assets/animations/fruit/Apple.png",
+      {
+        frameWidth: 32, 
+        frameHeight: 24,
       }
     );
   }

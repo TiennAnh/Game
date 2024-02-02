@@ -13,14 +13,17 @@ export default class MapScene extends Phaser.Scene {
 
     const tileset2 = map.addTilesetImage("Confetti", "confetti"); // TILESET - IMAGES
 
-    const backGround = map.createLayer("BackGround", [tileset1]);
+    const backGround = map.createLayer("BackGround", [tileset1]).setScale(1.5);
 
-    const colision = map.createLayer("Colision", [tileset2]).setAlpha(0.001); // LAYER
+    const colision = map
+      .createLayer("Colision", [tileset2])
+      .setScale(1.5)
+      .setAlpha(0.001); // LAYER
 
     // --------------------------------------------------- //
 
     // --------------------- PLAYER ---------------------- //
-    this.player = this.physics.add.sprite(58, 250, "move-Right");
+    this.player = this.physics.add.sprite(65, 250, "move-Right");
 
     this.player.setCollideWorldBounds(true);
 
@@ -58,7 +61,7 @@ export default class MapScene extends Phaser.Scene {
 
     // -------------------- ITEMS ------------------------ //
 
-    this.itemMoving = this.physics.add.sprite(50, 250, "start-Moving");
+    this.itemMoving = this.physics.add.sprite(55, 250, "start-Moving");
 
     this.anims.create({
       key: "start-moving",
@@ -71,11 +74,45 @@ export default class MapScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.itemMoving, colision); // Colider
+
+    this.checkPoint = this.physics.add.sprite(700, 250, "checkPoint");
+
+    this.anims.create({
+      key: "check-point",
+      frames: this.anims.generateFrameNumbers("checkPoint", {
+        start: 0,
+        end: 9,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.physics.add.collider(this.checkPoint, colision);
+
+    this.targetFruit = this.physics.add.sprite(100, 250, "Apple");
+
+    this.anims.create({
+      key: "apple",
+      frames: this.anims.generateFrameNumbers("Apple", {
+        start: 0,
+        end: 16,
+      }),
+      frameRate: 10,
+      repeat: -1,
+    });
+
+    this.physics.add.collider(this.targetFruit, colision);
   }
 
   update() {
-
+    // ------------------ ITEM -------------------- //
     this.itemMoving.anims.play("start-moving", true);
+
+    this.checkPoint.anims.play("check-point", true);
+
+    this.targetFruit.anims.play("apple", true);
+
+    // ------------------ PLAYER ----------------- //
 
     this.cursors = this.input.keyboard.createCursorKeys();
 
