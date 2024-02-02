@@ -1,6 +1,8 @@
 export default class MapScene extends Phaser.Scene {
   constructor() {
     super("MapScene");
+    this.score = 0;
+    this.scoreText;
   }
 
   preload() {}
@@ -61,6 +63,11 @@ export default class MapScene extends Phaser.Scene {
 
     // -------------------- ITEMS ------------------------ //
 
+    this.scoreText = this.add.text(10, 10, "score: 0", {
+      fontSize: "26px",
+      color: "#fff",
+    });
+
     this.itemMoving = this.physics.add.sprite(55, 250, "start-Moving");
 
     this.anims.create({
@@ -89,7 +96,17 @@ export default class MapScene extends Phaser.Scene {
 
     this.physics.add.collider(this.checkPoint, colision);
 
-    this.targetFruit = this.physics.add.sprite(100, 250, "Apple");
+    this.targetApple = this.physics.add.sprite(400, 150, "Apple");
+
+    this.targetApple.setGravity(0);
+
+    // this.targetBananas = this.physics.add.sprite(300, 150, "Bananas");
+
+    // this.targetCherries = this.physics.add.sprite(350, 150, "Cherries");
+
+    // this.targetKiwi = this.physics.add.sprite(200, 150, "Kiwi");
+
+    // this.targetMelon = this.physics.add.sprite(560, 150, "Melon");
 
     this.anims.create({
       key: "apple",
@@ -101,7 +118,70 @@ export default class MapScene extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.physics.add.collider(this.targetFruit, colision);
+    // this.anims.create({
+    //   key: "bananas",
+    //   frames: this.anims.generateFrameNumbers("Bananas", {
+    //     start: 0,
+    //     end: 16,
+    //   }),
+    //   frameRate: 10,
+    //   repeat: -1,
+    // });
+
+    // this.anims.create({
+    //   key: "cherries",
+    //   frames: this.anims.generateFrameNumbers("Cherries", {
+    //     start: 0,
+    //     end: 16,
+    //   }),
+    //   frameRate: 10,
+    //   repeat: -1,
+    // });
+
+    // this.anims.create({
+    //   key: "kiwi",
+    //   frames: this.anims.generateFrameNumbers("Kiwi", {
+    //     start: 0,
+    //     end: 16,
+    //   }),
+    //   frameRate: 10,
+    //   repeat: -1,
+    // });
+
+    // this.anims.create({
+    //   key: "melon",
+    //   frames: this.anims.generateFrameNumbers("Melon", {
+    //     start: 0,
+    //     end: 16,
+    //   }),
+    //   frameRate: 10,
+    //   repeat: -1,
+    // });
+
+    this.physics.add.collider(this.targetApple, colision);
+
+    this.physics.add.overlap(
+      this.player,
+      this.targetApple,
+      this.collectStart,
+      null,
+      this
+    );
+
+    // this.physics.add.collider(this.targetBananas, colision);
+
+    // this.physics.add.collider(this.targetCherries, colision);
+
+    // this.physics.add.collider(this.targetKiwi, colision);
+
+    // this.physics.add.collider(this.targetMelon, colision);
+  }
+
+  collectStart(player, targetApple) {
+    this.targetApple.disableBody(true, true);
+
+    this.score += 10;
+    this.scoreText.setText("Score: " + this.score);
   }
 
   update() {
@@ -110,7 +190,15 @@ export default class MapScene extends Phaser.Scene {
 
     this.checkPoint.anims.play("check-point", true);
 
-    this.targetFruit.anims.play("apple", true);
+    this.targetApple.anims.play("apple", true);
+
+    // this.targetBananas.anims.play("bananas", true);
+
+    // this.targetCherries.anims.play("cherries", true);
+
+    // this.targetKiwi.anims.play("kiwi", true);
+
+    // this.targetMelon.anims.play("melon", true);
 
     // ------------------ PLAYER ----------------- //
 

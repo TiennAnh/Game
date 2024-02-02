@@ -57,6 +57,42 @@ export default class BootScene extends Phaser.Scene {
         frameHeight: 24,
       }
     );
+
+    this.load.spritesheet(
+        "Bananas",
+        "/public/assets/animations/fruit/Bananas.png",
+        {
+          frameWidth: 32, 
+          frameHeight: 24,
+        }
+      );
+
+      this.load.spritesheet(
+        "Cherries",
+        "/public/assets/animations/fruit/Cherries.png",
+        {
+          frameWidth: 32, 
+          frameHeight: 24,
+        }
+      );
+
+      this.load.spritesheet(
+        "Kiwi",
+        "/public/assets/animations/fruit/Kiwi.png",
+        {
+          frameWidth: 32, 
+          frameHeight: 24,
+        }
+      );
+
+      this.load.spritesheet(
+        "Melon",
+        "/public/assets/animations/fruit/Melon.png",
+        {
+          frameWidth: 32, 
+          frameHeight: 24,
+        }
+      );
   }
 
   create() {
